@@ -1,4 +1,18 @@
-MIT License
+---
+
+### Step 2: Commit and Push Clean README to GitHub
+
+Run these commands in **Git Bash**:
+
+```bash
+# 1. Stage updated README.md
+git add README.md
+
+# 2. Commit documentation
+git commit -m "docs: finalize data science README documentation"
+
+# 3. Push to main branch
+git push origin mainMIT License
 
 Copyright (c) 2026 Mahesh Rao Kota
 
