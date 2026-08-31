@@ -57,7 +57,7 @@ with st.sidebar:
 # Run Data & Inference Pipeline
 config = TelemetryConfig()
 telemetry = generate_synthetic_telemetry(config)
-results = detect_anomalies(
+results, shap_values, feature_names = detect_anomalies(
     telemetry=telemetry,
     z_score_cutoff=z_score_cutoff,
     rolling_window=rolling_window,
