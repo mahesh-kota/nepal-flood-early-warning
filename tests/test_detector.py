@@ -31,6 +31,19 @@ def test_dynamic_z_score_detects_sharp_spike() -> None:
 
 def test_combined_detector_flags_surge_region() -> None:
     """Combined detector should flag anomalies once the flood surge starts."""
+    telemetry = generate_synthetic_telemetry(
+        TelemetryConfig(minutes=240, surge_start_minute=120, surge_duration_minutes=45, random_seed=13)
+    )
+    results, shap_values, feature_names = detect_anomalies(
+        telemetry,
+        z_score_cutoff=2.5,
+        rolling_window=20,
+        contamination=0.04,
+        random_seed=13,
+    )
+    flagged = results.loc[results["alert"]]
+    assert not flagged.empty
+    assert flagged["is_surge"].any()
 
     telemetry = generate_synthetic_telemetry(
         TelemetryConfig(minutes=240, surge_start_minute=120, surge_duration_minutes=45, random_seed=13)
